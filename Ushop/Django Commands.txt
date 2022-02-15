@@ -31,5 +31,8 @@ python manage.py sqlmigrate application_name(products) dbfile_name(0001)
 List project migration and their status
 python manage.py showmigrations
 
+hard refresh
+ ctrl + f5
+
 
 

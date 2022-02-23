@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
-
+from django.contrib import messages
 from .forms import CustomerRegistrationForm
 from .models import *
 
@@ -82,8 +82,11 @@ class CustomerRegistrationView(View):
         return render(request, 'app/registrationform.html', {'form': form})
 
     def post(self, request):
+        import django;
+        print(django)
         form = CustomerRegistrationForm(request.POST)
         if form.is_valid():
+            messages.success(request, 'Congratulations! Registered Successful.')
             form.save()
         return render(request, 'app/registrationform.html', {'form': form})
 

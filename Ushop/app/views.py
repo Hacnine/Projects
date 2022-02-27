@@ -91,4 +91,4 @@ class CustomerRegistrationView(View):
 
 def checkout(request):
     return render(request, 'app/checkout.html')
-#
+#3

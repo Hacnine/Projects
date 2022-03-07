@@ -17,7 +17,7 @@ urlpatterns = [
     path('mobile/<slug:data>', views.mobile, name='mobiledata'),
     path('login/', auth_view.LoginView.as_view(template_name='app/login.html',
                                                authentication_form=LoginForm), name='login'),
-    path('logout/', auth_view.LogoutView.as_view(), name='logout'),
+    path('logout/', auth_view.LogoutView.as_view(next_page='login'), name='logout'),
     # path('registration/', views.customerregistration, name='customerregistration'),
     path('registration/', views.CustomerRegistrationView.as_view(), name='customerregistration'),
     path('checkout/', views.checkout, name='checkout'),

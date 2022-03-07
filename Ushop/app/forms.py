@@ -7,7 +7,8 @@ from django.utils.translation import gettext, gettext_lazy
 
 class CustomerRegistrationForm(UserCreationForm):
     password1 = forms.CharField(label="Password", help_text="at least 5 characters",
-                                widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+                                widget=forms.PasswordInput(attrs={'class': 'form-control',
+                                                                  'placeholder': 'Enter password'}))
     password2 = forms.CharField(label="Confirm Password Again",
                                 widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     email = forms.CharField(label="Email", validators=[validators.MaxLengthValidator(30)],
@@ -22,7 +23,7 @@ class CustomerRegistrationForm(UserCreationForm):
 
 
 class LoginForm(AuthenticationForm):
-    username = UsernameField(widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control'}))
+    username = UsernameField(widget=forms.TextInput(attrs={'autofocus': True,'class': 'form-control'}))
     password = forms.CharField(label=gettext_lazy('Password'), strip=False,
                                widget=forms.PasswordInput(attrs={'autocomplete': 'current-password',
                                                                  'class': 'form-control'}))

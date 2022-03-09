@@ -31,13 +31,13 @@ class LoginForm(AuthenticationForm):
 
 
 class MyPasswordChangeForm(PasswordChangeForm):
-    old_password = forms.CharField(label=gettext_lazy('Old Password'), strip=False,
+    old_password = forms.CharField(label=gettext_lazy("Old Password"), strip=False,
                                    widget=forms.PasswordInput(attrs={'autocomplete': 'current-password',
                                                                      'autofocus': True, 'class': 'form-control'}))
-    new_password1 = forms.CharField(label=gettext_lazy('New Password'), strip=False,
-                                    widget=forms.PasswordInput(attrs={'autocomplete': 'current-password',
+    new_password1 = forms.CharField(label=gettext_lazy("New Password"), strip=False,
+                                    widget=forms.PasswordInput(attrs={'autocomplete': 'new-password',
                                                                       'autofocus': True, 'class': 'form-control'}),
                                     help_text=password_validation.password_validators_help_text_html()),
-    new_password2 = forms.CharField(label=gettext_lazy('Confirm Password'), strip=False,
-                                    widget=forms.PasswordInput(attrs={'autocomplete': 'current-password',
+    new_password2 = forms.CharField(label=gettext_lazy("Confirm Password"), strip=False,
+                                    widget=forms.PasswordInput(attrs={'autocomplete': 'new-password',
                                                                       'autofocus': True, 'class': 'form-control'}))

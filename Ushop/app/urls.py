@@ -22,7 +22,7 @@ urlpatterns = [
     path('checkout/', views.checkout, name='checkout'),
 
     path('passwordchange/', auth_view.PasswordChangeView.as_view(template_name='app/passwordchange.html',
-                                                                 form_class=MyPasswordChangeForm),
-         name='passwordchange'),
+                                                                 form_class=MyPasswordChangeForm, success_url='/passchangedone/',), name='passwordchange'),
+    path('passchangedone/', auth_view.PasswordChangeDoneView.as_view(template_name='app/passchangedone.html'), name='passchangedone')
 
 ]

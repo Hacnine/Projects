@@ -1,8 +1,11 @@
+from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
 from django.contrib import messages
-from .forms import CustomerRegistrationForm
+from django.views.generic import CreateView
+
+from .forms import CustomerRegistrationForm, MyPasswordChangeForm
 from .models import *
 
 
@@ -91,4 +94,4 @@ class CustomerRegistrationView(View):
 
 def checkout(request):
     return render(request, 'app/checkout.html')
-#3
+

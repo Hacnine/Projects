@@ -49,3 +49,15 @@ class MyPasswordResetForm(PasswordResetForm):
                             widget=forms.EmailInput(attrs={'autocomplete': 'email', 'class': 'form-control'}))
 
 
+class MyPasswordResetConfirmView(PasswordChangeForm):
+    old_password = None
+    new_password1 = forms.CharField(label=gettext_lazy("New Password"), strip=False,
+                                    widget=forms.PasswordInput(attrs={'autocomplete': 'new-password',
+                                                                      'autofocus': True, 'class': 'form-control'}),
+                                    help_text=password_validation.password_validators_help_text_html()),
+    new_password2 = forms.CharField(label=gettext_lazy("Confirm Password"), strip=False,
+                                    widget=forms.PasswordInput(attrs={'autocomplete': 'new-password',
+                                                                      'autofocus': True, 'class': 'form-control'}))
+
+
+

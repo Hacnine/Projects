@@ -60,4 +60,4 @@ class MyPasswordResetConfirmView(PasswordChangeForm):
                                                                       'autofocus': True, 'class': 'form-control'}))
 
 
-
+#

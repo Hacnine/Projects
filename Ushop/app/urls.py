@@ -29,3 +29,4 @@ urlpatterns = [
     path('password-reset-confirm/<uid64>/<token>/', auth_view.PasswordResetConfirmView.as_view(template_name='app/password_reset_confirm.html', form_class=MyPasswordResetConfirmView), name='password_reset_confirm'),
 
 ]
+

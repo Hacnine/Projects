@@ -45,19 +45,18 @@ class MyPasswordChangeForm(PasswordChangeForm):
 
 
 class MyPasswordResetForm(PasswordResetForm):
-    email = forms.CharField(label="Email", max_length=254,
+    email = forms.EmailField(label="Email", max_length=254,
                             widget=forms.EmailInput(attrs={'autocomplete': 'email', 'class': 'form-control'}))
 
 
 class MySetPasswordForm(SetPasswordForm):
     # old_password = None
-    new_password1 = forms.CharField(label=gettext_lazy("New Password"), strip=False,
+    new_password1 = forms.CharField(label=gettext_lazy("New Password"),
                                     widget=forms.PasswordInput(attrs={'autocomplete': 'new-password',
-                                                                      'autofocus': True, 'class': 'form-control'}),
+                                                                      'class': 'form-control'}),
                                     help_text=password_validation.password_validators_help_text_html()),
-    new_password2 = forms.CharField(label=gettext_lazy("Confirm New Password"), strip=False,
-                                    widget=forms.PasswordInput(attrs={'autocomplete': 'new-password',
-                                                                      'autofocus': True, 'class': 'form-control'}))
+    new_password2 = forms.CharField(label=gettext_lazy("Confirm New Password"),
+                                    widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control'}))
 
 
 #

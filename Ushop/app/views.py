@@ -5,7 +5,7 @@ from django.views import View
 from django.contrib import messages
 from django.views.generic import CreateView
 
-from .forms import CustomerRegistrationForm, MyPasswordChangeForm
+from .forms import *
 from .models import *
 
 
@@ -39,10 +39,6 @@ def add_to_cart(request):
 
 def buy_now(request):
     return render(request, 'app/buynow.html')
-
-
-def profile(request):
-    return render(request, 'app/profile.html')
 
 
 def address(request):
@@ -95,3 +91,8 @@ class CustomerRegistrationView(View):
 def checkout(request):
     return render(request, 'app/checkout.html')
 
+
+class ProfileView(View):
+    def get(self, request):
+        form = CustomerProfileForm()
+        return render(request, 'app/profile.html', {'form': form})

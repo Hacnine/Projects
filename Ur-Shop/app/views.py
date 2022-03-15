@@ -98,14 +98,13 @@ class ProfileView(View):
         form = CustomerProfileForm(request.POST)
         if form.is_valid():
             usr = request.user
-            address_no = form.cleaned_data['Address_no']
             name = form.cleaned_data['name']
             locality = form.cleaned_data['locality']
             city = form.cleaned_data['city']
             zipcode = form.cleaned_data['zipcode']
             state = form.cleaned_data['state']
 
-            new_address = Customer(user=usr, Address_no=address_no, name=name, locality=locality, city=city, state=state, zipcode=zipcode, )
+            new_address = Customer(user=usr, name=name, locality=locality, city=city, state=state, zipcode=zipcode, )
             new_address.save()
             messages.success(request, 'Address updated successful.')
 

@@ -11,7 +11,6 @@ DIVISION_CHOICES = (
 
 class Customer (models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    Address_no = models.IntegerField()
     name = models.CharField(max_length=200)
     locality = models.CharField(max_length=200)
     city = models.CharField(max_length=200)

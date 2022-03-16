@@ -1,6 +1,6 @@
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
 from django.views.generic import CreateView
@@ -33,8 +33,18 @@ class ProductDetailView(View):
         return render(request, 'app/productdetail.html', {'product': product})
 
 
-def add_to_cart(request):
-    return render(request, 'app/addtocart.html')
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def buy_now(request):
@@ -112,8 +122,25 @@ class ProfileView(View):
 
 
 def address(request):
-    add = Customer.objects.filter(user=request.user)
-    return render(request, 'app/address.html', {'add': add, 'active': 'btn-primary'})
+    address = Customer.objects.filter(user=request.user)
+    return render(request, 'app/address.html', {'add': address, 'active': 'btn-primary'})
 
+
+def add_to_cart(request):
+    usr = request.user
+    product_id = request.GET.get('prod_id')
+    print('id', product_id)
+    product = Product.objects.get(pk=product_id)
+    print('instance', product)
+    Cart(user=usr, product=product).save()
+
+    return redirect('/cart')
+
+
+def show_cart(request):
+    if request.user.is_authenticated:
+        user = request.user
+        carts = Cart.objects.filter(user=user)
+        return render(request, 'app/addtocart.html', {'carts': carts})
 
 

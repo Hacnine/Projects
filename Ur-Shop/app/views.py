@@ -33,20 +33,6 @@ class ProductDetailView(View):
         return render(request, 'app/productdetail.html', {'product': product})
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def buy_now(request):
     return render(request, 'app/buynow.html')
 
@@ -104,7 +90,6 @@ class ProfileView(View):
         return render(request, 'app/profile.html', {'form': form, 'active': 'btn-primary'})
 
     def post(self, request):
-
         form = CustomerProfileForm(request.POST)
         if form.is_valid():
             usr = request.user
@@ -123,7 +108,12 @@ class ProfileView(View):
 
 def address(request):
     address = Customer.objects.filter(user=request.user)
+    # print(address)
     return render(request, 'app/address.html', {'add': address, 'active': 'btn-primary'})
+
+
+def edit_address(request, pk):
+    return render(request, 'app/edit_address.html')
 
 
 def add_to_cart(request):
@@ -159,5 +149,3 @@ def show_cart(request):
                 print(p.id)
 
         return render(request, 'app/addtocart.html', {'carts': carts, 'amount': amount, 'total_amount': total_amount})
-
-

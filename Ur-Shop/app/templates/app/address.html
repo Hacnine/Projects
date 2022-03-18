@@ -28,6 +28,10 @@
        <p>State: {{ad.state}}</p>
        <p>Zipcode: {{ad.zipcode}}</p>
         <a href="{% url 'edit_address' ad.id %}" class="btn btn-primary">Edit</a>
+          <form action="{% url 'delete' ad.id %}" method="post" class="d-inline">
+              {% csrf_token %}
+              <input type="submit" class="btn btn-danger" value="Delete">
+          </form>
        {% endfor %}
       </div>
      </div>

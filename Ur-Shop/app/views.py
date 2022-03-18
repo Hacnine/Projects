@@ -1,5 +1,5 @@
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
@@ -116,6 +116,14 @@ def edit_address(request, pk):
     address = Customer.objects.filter(id=pk)
     print(address)
     return render(request, 'app/edit_address.html', {'address': address})
+
+
+def delete_address(request, id):
+    if request.method == 'POST':
+        pi = Customer.objects.get(pk=id)
+        pi.delete()
+    return HttpResponseRedirect('/address/')
+
 
 
 def add_to_cart(request):

@@ -113,7 +113,9 @@ def address(request):
 
 
 def edit_address(request, pk):
-    return render(request, 'app/edit_address.html')
+    address = Customer.objects.filter(id=pk)
+    print(address)
+    return render(request, 'app/edit_address.html', {'address': address})
 
 
 def add_to_cart(request):

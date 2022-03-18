@@ -21,12 +21,13 @@
     </div>
           <h1>{{add.id}}</h1>
        {% for ad in add %}
-          <h1>{{ad.id}}</h1>
+          <h1></h1>
        <h3>Address {{forloop.counter}}</h3>
        <p>Name: {{ad.name}}</p>
        <p>locality: {{ad.locality}}</p>
        <p>State: {{ad.state}}</p>
-       <p>Zipcode: {{ad.zipcode}}</p> <a href="{% url 'edit_address' 1 %}" class="btn btn-primary">Edit</a>
+       <p>Zipcode: {{ad.zipcode}}</p>
+        <a href="{% url 'edit_address' ad.id %}" class="btn btn-primary">Edit</a>
        {% endfor %}
       </div>
      </div>

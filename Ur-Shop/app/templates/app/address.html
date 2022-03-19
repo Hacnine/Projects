@@ -20,19 +20,12 @@
    <div class="form-group col-lgl6 mb-3">
     </div>
           <h1>{{add.id}}</h1>
-       {% for ad in add %}
-          <h1></h1>
-       <h3>Address {{forloop.counter}}</h3>
-       <p>Name: {{ad.name}}</p>
-       <p>locality: {{ad.locality}}</p>
-       <p>State: {{ad.state}}</p>
-       <p>Zipcode: {{ad.zipcode}}</p>
+
         <a href="{% url 'edit_address' ad.id %}" class="btn btn-primary">Edit</a>
           <form action="{% url 'delete' ad.id %}" method="post" class="d-inline">
               {% csrf_token %}
               <input type="submit" class="btn btn-danger" value="Delete">
           </form>
-       {% endfor %}
       </div>
      </div>
     </div>

@@ -112,10 +112,16 @@ def address(request):
     return render(request, 'app/address.html', {'add': address, 'active': 'btn-primary'})
 
 
-def edit_address(request, pk):
-    address = Customer.objects.filter(id=pk)
-    print(address)
-    return render(request, 'app/edit_address.html', {'address': address})
+def edit_address(request, id):
+    if request.method == 'POST':
+        pi = Customer.objects.get(pk=id)
+        fm = CustomerRegistrationForm(request.POST, instance=pi)
+        if fm.is_valid():
+            fm.save()
+
+        el
+    # return HttpResponseRedirect('/address/')
+    return render(request, 'app/edit_address.html', {'address': pi})
 
 
 def delete_address(request, id):
@@ -123,7 +129,6 @@ def delete_address(request, id):
         pi = Customer.objects.get(pk=id)
         pi.delete()
     return HttpResponseRedirect('/address/')
-
 
 
 def add_to_cart(request):

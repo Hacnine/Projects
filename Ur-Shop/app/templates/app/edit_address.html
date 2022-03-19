@@ -15,18 +15,20 @@
     <div class="col-sm-6">
      <div class="card">
       <div class="card-body">
-       <h3>Edit Address</h3>
+          <h3>Edit Your Shipping Address</h3>
+
    <div class="form-group col-lgl6 mb-3">
     </div>
-          <h1>{{add.id}}</h1>
-       {% for ad in address %}
-          <h1>{{ad.id}}</h1>
-       <h3>Address {{forloop.counter}}</h3>
-       <p>Name: {{ad.name}}</p>
-       <p>locality: {{ad.locality}}</p>
-       <p>State: {{ad.state}}</p>
-       <p>Zipcode: {{ad.zipcode}}</p>
+     <form action="" method="post" novalidate class="shadow p-5">
+       {% csrf_token %}
+       {% for fm in form %}
+       <div class="form-group mb-3">
+           {{ fm.label_tag}} {{ fm }} <small class="text-danger">{{fm.errors|striptags}}</small>
+       </div>
        {% endfor %}
+       <input type="submit" value="Submit" class="btn btn-primary">
+   </form>
+
       </div>
      </div>
     </div>

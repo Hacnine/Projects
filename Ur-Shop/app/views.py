@@ -115,13 +115,16 @@ def address(request):
 def edit_address(request, id):
     if request.method == 'POST':
         pi = Customer.objects.get(pk=id)
-        fm = CustomerRegistrationForm(request.POST, instance=pi)
+        fm = CustomerProfileForm(request.POST, instance=pi)
         if fm.is_valid():
             fm.save()
 
-        el
-    # return HttpResponseRedirect('/address/')
-    return render(request, 'app/edit_address.html', {'address': pi})
+    else:
+        pi = Customer.objects.get(pk=id)
+        fm = CustomerProfileForm(request.POST, instance=pi)
+        return render(request, 'app/edit_address.html', {'form': fm})
+
+    return HttpResponseRedirect('/address/')
 
 
 def delete_address(request, id):

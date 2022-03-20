@@ -122,7 +122,8 @@ def edit_address(request, id):
     else:
         pi = Customer.objects.get(pk=id)
         fm = CustomerProfileForm(request.POST, instance=pi)
-        return render(request, 'app/edit_address.html', {'form': fm})
+        address = Customer.objects.filter(user=request.user)
+        return render(request, 'app/edit_address.html', {'form': fm, 'add': address})
 
     return HttpResponseRedirect('/address/')
 

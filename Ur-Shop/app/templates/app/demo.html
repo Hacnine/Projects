@@ -1,0 +1,78 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-2 border-end">
+   <ul class="list-unstyled">
+    <li class="d-grid"><a href="{% url 'profile' %}" class="btn ">Profile</a></li>
+    <li class="d-grid"><a href="{% url 'address' %}" class="btn {{active}}">Address</a></li>
+   </ul>
+  </div>
+  <div class="col-sm-9 offset-sm-1">
+   <div class="row">
+    <div class="col-sm-6">
+     <div class="card">
+      <div class="card-body">
+          <h3>Edit Your Shipping Address</h3>
+
+   <div class="form-group col-lgl6 mb-3">
+    </div>
+
+
+
+
+
+<form action="" method="post" novalidate="" class="shadow p-5">
+       <input type="hidden" name="csrfmiddlewaretoken" value="JMbewN29ejZA2OnQ1QViKmgV7QAKo202kRpCx3yFOvpT5Cyb8CWvJiLex2FuLFrk">
+
+
+    {% for ad in add %}
+
+
+
+       <div class="form-group mb-3">
+           <label for="id_name">Name:</label> <input type="text" name="name" value="{{ad.name}}" class="form-control" maxlength="200" required="" id="id_name"> <small class="text-danger">This field is required.</small>
+       </div>
+
+       <div class="form-group mb-3">
+           <label for="id_locality">Locality:</label> <input type="text" name="locality" value="{{ad.locality}}" class="form-control" maxlength="200" required="" id="id_locality"> <small class="text-danger">This field is required.</small>
+       </div>
+
+       <div class="form-group mb-3">
+           <label for="id_city">City:</label> <input type="text" name="city" value="{{ad.city}}" class="form-control" maxlength="200" required="" id="id_city"> <small class="text-danger">This field is required.</small>
+       </div>
+
+       <div class="form-group mb-3">
+           <label for="id_zipcode">Zipcode:</label> <input type="number" name="zipcode" value="{{ad.zipcode}}" class="form-control" required="" id="id_zipcode"> <small class="text-danger">This field is required.</small>
+       </div>
+
+       <div class="form-group mb-3">
+           <label for="id_state">State:</label> <select name="state"  class="form-control" required="" id="id_state">
+      <option value="" selected="">---------</option>
+
+      <option value="Khulna">Khulna</option>
+
+      <option value="DHAKA">Dhaka</option>
+
+      <option value="Sylhet">Sylhet</option>
+
+        </select> <small class="text-danger">This field is required.</small>
+       </div>
+           {% endfor %}
+
+
+       <input type="submit" value="Submit" class="btn btn-primary">
+   </form>
+
+              </div>
+     </div>
+    </div>
+
+   </div>
+  </div>
+ </div>
+</div>
+
+{% endblock main-content %}

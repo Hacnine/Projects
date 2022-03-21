@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3 class="text-center">You don't add a product yet</h3>
+<div class="text-center">
+    <img src="{% static 'app/images/emptycart.png' %}" alt="" class="img-fluid img-thumbnail w-25">
+</div>
+</body>
+</html>
+{% endblock %}

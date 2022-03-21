@@ -123,6 +123,8 @@ def edit_address(request, id):
         pi = Customer.objects.get(pk=id)
         fm = CustomerProfileForm(request.POST, instance=pi)
         address = Customer.objects.filter(user=request.user)
+        print(address)
+
         return render(request, 'app/edit_address.html', {'form': fm, 'add': address})
 
     return HttpResponseRedirect('/address/')
@@ -150,10 +152,10 @@ def show_cart(request):
     if request.user.is_authenticated:
         user = request.user
         carts = Cart.objects.filter(user=user)
-        print(carts)
+        # print(carts)
 
         cart_product = [p for p in carts]
-        print(cart_product)
+        # print(cart_product)
 
         amount = 0.0
         shipping_amount = 70.0
@@ -167,4 +169,7 @@ def show_cart(request):
                 total_amount = amount + shipping_amount
                 print(p.id)
 
-        return render(request, 'app/addtocart.html', {'carts': carts, 'amount': amount, 'total_amount': total_amount})
+            return render(request, 'app/addtocart.html', {'carts': carts, 'amount': amount, 'total_amount': total_amount})
+
+        else:
+            return render(request, 'app/empty_cart.html')

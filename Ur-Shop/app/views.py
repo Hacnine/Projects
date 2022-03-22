@@ -1,5 +1,6 @@
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import HttpResponse, HttpResponseRedirect
+from django.db.models import Q
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
@@ -153,7 +154,6 @@ def show_cart(request):
         user = request.user
         carts = Cart.objects.filter(user=user)
         # print(carts)
-
         cart_product = [p for p in carts]
         # print(cart_product)
 
@@ -167,9 +167,48 @@ def show_cart(request):
                 temp_amount = (p.quantity * p.product.discounted_price)
                 amount += temp_amount
                 total_amount = amount + shipping_amount
-                print(p.id)
+                # print(p.id)
 
-            return render(request, 'app/addtocart.html', {'carts': carts, 'amount': amount, 'total_amount': total_amount})
+            return render(request, 'app/addtocart.html',
+                          {'carts': carts, 'amount': amount, 'total_amount': total_amount})
 
         else:
             return render(request, 'app/empty_cart.html')
+
+
+def plus_cart(request):
+    if request.method == 'GET':
+        user = request.user
+        prod_id = request.GET['prod_id']
+        print(prod_id)
+        current = Cart.objects.get(Q(product=prod_id) & Q(user=request.user))
+        # print(current)
+
+        current.quantity += 1
+        current.save()
+        print(current.quantity)
+
+        amount = 0.0
+        shipping_amount = 70.0
+        totalamount = 0.0
+
+        cart_product = [p for p in Cart.objects.all() if p.user == request.user]
+        # print(cart_product)
+
+        for p in cart_product:
+            temp_amount = (p.quantity * p.product.discounted_price)
+            amount += temp_amount
+            totalamount = amount + shipping_amount
+
+        data = {
+            'quantity': current.quantity,
+            'amount': amount,
+            'totalamount': totalamount
+        }
+        return JsonResponse(data)
+    return render(request, 'app/addtocart.html',
+                          )
+
+
+def minus_cart(request):
+    pass

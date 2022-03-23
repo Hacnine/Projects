@@ -23,8 +23,10 @@ $('#slider1, #slider2, #slider3').owlCarousel({
 })
 
 $('.plus-cart').click(function() {
-    console.log("Plus Clicked")
+//    console.log("Plus Clicked")
     var id = $(this).attr("pid").toString();
+    var eml = this.parentNode.children[2];
+    console.log(eml)
     console.log(id)
     $.ajax({
         type: "GET",
@@ -36,6 +38,6 @@ $('.plus-cart').click(function() {
     success: function (data) {
     console.log(data)
     console.log("Success")
-               }
+        }
     })
 })

@@ -194,7 +194,7 @@ def plus_cart(request):
 
         amount = 0.0
         shipping_amount = 70.0
-        totalamount = 0.0
+        total_amount = 0.0
 
         # Cart.objects.all() এ সকল ইউজারের কার্ট পাওয়া যাবে; তো এখানে সমস্ত ইউজরের প্রথম প্রোডাক্ট বের করে 'p' তে
         # রাখা হবে এবং চেক করে হবে যে p.user মানে এই প্রোডাক্টের ইউজার আর বর্তমানে যে ইউজার লগইন করে আছে মানে
@@ -205,12 +205,12 @@ def plus_cart(request):
         for p in cart_product:
             temp_amount = (p.quantity * p.product.discounted_price)
             amount += temp_amount
-            totalamount = amount + shipping_amount
+            total_amount = amount + shipping_amount
 
         data = {
             'quantity': current.quantity,
             'amount': amount,
-            'totalamount': totalamount
+            'total_amount': total_amount
         }
         return JsonResponse(data)
     return render(request, 'app/addtocart.html',

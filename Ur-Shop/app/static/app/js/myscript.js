@@ -23,10 +23,10 @@ $('#slider1, #slider2, #slider3').owlCarousel({
 })
 
 $('.plus-cart').click(function() {
-//    console.log("Plus Clickedd")
+//    console.log("Plus Clicked")
     var id = $(this).attr("pid").toString();
-//    var eml = this.parentNode.children[2];
-    var quantit = document.getElementById('quantity');
+    var eml = this.parentNode.children[2];
+//    var quantit = document.getElementById('quantity');
     $.ajax({
         type: "GET",
         url: "/pluscart",
@@ -35,7 +35,10 @@ $('.plus-cart').click(function() {
         },
 
     success: function (data) {
-    quantit.innerText = data.quantity
+    eml.innerText = data.quantity
+    document.getElementById("amount").innerText = data.amount
+    document.getElementById("totalamount").innerText = data.total_amount
+
         }
     })
 })

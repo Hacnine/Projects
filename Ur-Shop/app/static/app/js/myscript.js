@@ -23,11 +23,10 @@ $('#slider1, #slider2, #slider3').owlCarousel({
 })
 
 $('.plus-cart').click(function() {
-//    console.log("Plus Clicked")
+//    console.log("Plus Clickedd")
     var id = $(this).attr("pid").toString();
-    var eml = this.parentNode.children[2];
-    console.log(eml)
-    console.log(id)
+//    var eml = this.parentNode.children[2];
+    var quantit = document.getElementById('quantity');
     $.ajax({
         type: "GET",
         url: "/pluscart",
@@ -36,8 +35,7 @@ $('.plus-cart').click(function() {
         },
 
     success: function (data) {
-    console.log(data)
-    console.log("Success")
+    quantit.innerText = data.quantity
         }
     })
 })

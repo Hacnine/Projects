@@ -137,6 +137,42 @@ def delete_address(request, id):
         pi.delete()
     return HttpResponseRedirect('/address/')
 
+#
+# def remove_item(request, id):
+#     pi = Cart.objects.get(pk=id)
+#     pi.delete()
+#     return HttpResponseRedirect('/cart/')
+#
+# <!--        this is for function remove cart-->
+# <!--        <a href="{% url 'remove_item' cart.id %}" class="btn btn-sm btn-secondary mr-3" pid="{{cart.product.id}}">Remove item </a>-->
+
+
+def remove_cart(request):
+    if request.method == 'GET':
+        user = request.user
+        prod_id = request.GET['prod_id']
+        print(prod_id)
+        current = Cart.objects.get(Q(product=prod_id) & Q(user=request.user))
+        # print(current)
+        current.delete()
+
+        amount = 0.0
+        shipping_amount = 70.0
+        total_amount = 0.0
+        cart_product = [p for p in Cart.objects.all() if p.user == request.user]
+        # print(cart_product)
+
+        for p in cart_product:
+            temp_amount = (p.quantity * p.product.discounted_price)
+            amount += temp_amount
+            total_amount = amount + shipping_amount
+
+        data = {
+            'amount': amount,
+            'total_amount': total_amount
+        }
+        return JsonResponse(data)
+
 
 def add_to_cart(request):
     usr = request.user
@@ -213,9 +249,36 @@ def plus_cart(request):
             'total_amount': total_amount
         }
         return JsonResponse(data)
-    return render(request, 'app/addtocart.html',
-                          )
+    return render(request, 'app/addtocart.html')
 
 
 def minus_cart(request):
-    pass
+    if request.method == 'GET':
+        user = request.user
+        prod_id = request.GET['prod_id']
+        print(prod_id)
+        current = Cart.objects.get(Q(product=prod_id) & Q(user=request.user))
+        # print(current)
+
+        if current.quantity is not 1:
+            current.quantity -= 1
+            current.save()
+            print(current.quantity)
+
+        amount = 0.0
+        shipping_amount = 70.0
+        total_amount = 0.0
+        cart_product = [p for p in Cart.objects.all() if p.user == request.user]
+        # print(cart_product)
+
+        for p in cart_product:
+            temp_amount = (p.quantity * p.product.discounted_price)
+            amount += temp_amount
+            total_amount = amount + shipping_amount
+
+        data = {
+            'quantity': current.quantity,
+            'amount': amount,
+            'total_amount': total_amount
+        }
+        return JsonResponse(data)

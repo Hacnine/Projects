@@ -81,8 +81,38 @@ class CustomerRegistrationView(View):
         return render(request, 'app/registrationform.html', {'form': form})
 
 
+def total_amount(request):
+    user = request.user
+    carts = Cart.objects.filter(user=user)
+    # print(carts)
+    cart_product = [p for p in carts]
+    # print(cart_product)
+
+    amount = 0.0
+    shipping_amount = 70.0
+    tot_amount = 0.0
+
+    # Cart.objects.all() এ সকল ইউজারের কার্ট পাওয়া যাবে; তো এখানে সমস্ত ইউজরের প্রথম প্রোডাক্ট বের করে 'p' তে
+    # রাখা হবে এবং চেক করে হবে যে p.user মানে এই প্রোডাক্টের ইউজার আর বর্তমানে যে ইউজার লগইন করে আছে মানে
+    # request.user একই ইউজার কিনা, যদি এক হয় তাহলে [p for ... এই p  তে রাখা হবে।
+    # cart_product = [p for p in Cart.objects.all() if p.user == user]
+    # print(cart_product)
+    if cart_product:
+        for p in cart_product:
+            temp_amount = (p.quantity * p.product.discounted_price)
+            amount += temp_amount
+            tot_amount = amount + shipping_amount
+            # print(p)
+    return tot_amount
+
+
 def checkout(request):
-    return render(request, 'app/checkout.html')
+    user = request.user
+    current_customer = Customer.objects.filter(user=user)
+    # to get total amount calling a method
+    total = total_amount(request)
+    print(total)
+    return render(request, 'app/checkout.html', {'customer': current_customer, 'total': total})
 
 
 class ProfileView(View):
@@ -143,7 +173,7 @@ def delete_address(request, id):
 #     pi.delete()
 #     return HttpResponseRedirect('/cart/')
 #
-# <!--        this is for function remove cart-->
+# <!--        this is url for function remove cart-->
 # <!--        <a href="{% url 'remove_item' cart.id %}" class="btn btn-sm btn-secondary mr-3" pid="{{cart.product.id}}">Remove item </a>-->
 
 

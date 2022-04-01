@@ -83,9 +83,9 @@ class CustomerRegistrationView(View):
 
 def total_amount(request):
     user = request.user
-    carts = Cart.objects.filter(user=user)
+    cart_item = Cart.objects.filter(user=user)
     # print(carts)
-    cart_product = [p for p in carts]
+    cart_product = [p for p in cart_item]
     # print(cart_product)
 
     amount = 0.0
@@ -109,10 +109,30 @@ def total_amount(request):
 def checkout(request):
     user = request.user
     current_customer = Customer.objects.filter(user=user)
+    cart_item = Cart.objects.filter(user=user)
+    print('current_customer', current_customer)
     # to get total amount calling a method
     total = total_amount(request)
     print(total)
-    return render(request, 'app/checkout.html', {'customer': current_customer, 'total': total})
+    return render(request, 'app/checkout.html', {'customer': current_customer, 'total': total, 'cart_item': cart_item})
+
+
+def payment_done(request):
+    user = request.user
+    if request.method == 'GET':
+        cust_id = request.GET.get('custid')
+        print('custid', cust_id)
+        customer = Customer.objects.get(id=cust_id)
+        print('customer', customer)
+        cart_items = Cart.objects.filter(user=user)
+
+        for first_item in cart_items:
+            print('first_item', first_item)
+            OrderPlaced(user=user, customer=customer,
+                        product=first_item.product,
+                        quantity=first_item.quantity).save()
+            # first_item.delete()
+        return redirect("orders")
 
 
 class ProfileView(View):

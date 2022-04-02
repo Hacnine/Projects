@@ -39,7 +39,8 @@ def buy_now(request):
 
 
 def orders(request):
-    return render(request, 'app/orders.html')
+    order_placed = OrderPlaced.objects.filter(user=request.user)
+    return render(request, 'app/orders.html', {'order_placed': order_placed})
 
 
 # def change_password(request):
@@ -131,7 +132,7 @@ def payment_done(request):
             OrderPlaced(user=user, customer=customer,
                         product=first_item.product,
                         quantity=first_item.quantity).save()
-            # first_item.delete()
+            first_item.delete()
         return redirect("orders")
 
 

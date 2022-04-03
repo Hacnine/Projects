@@ -127,12 +127,12 @@ def payment_done(request):
         print('customer', customer)
         cart_items = Cart.objects.filter(user=user)
 
-        for first_item in cart_items:
-            print('first_item', first_item)
+        for item in cart_items:
+            print('item', item)
             OrderPlaced(user=user, customer=customer,
-                        product=first_item.product,
-                        quantity=first_item.quantity).save()
-            first_item.delete()
+                        product=item.product,
+                        quantity=item.quantity).save()
+            item.delete()
         return redirect("orders")
 
 

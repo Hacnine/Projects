@@ -6,8 +6,20 @@
 <!--Banner Slider-->
  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="{% static 'app/images/banner/b1.jpg' %}" class="d-block w-100" alt="..."> 
+
+<!--   এই কোডিং এর সমস্যা হলো লুপ বাদ দিয়ে একটা একটা  করে  ইমেজ গুলো দেখাতে হবে কিন্তু এটা পারছি না।   -->
+<!--    <div class="carousel-item active">-->
+<!--        {% for b in banner_slider %}-->
+<!--          <img src="{{b.banner_slider_item.url}}" class="d-block w-100" >-->
+<!--        {% endfor %}-->
+<!--    </div>-->
+
+
+
+
+
+      <div class="carousel-item active">
+      <img src="{% static 'app/images/banner/b1.jpg' %}" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
       <img src="{% static 'app/images/banner/b2.jpg' %}" class="d-block w-100" alt="...">

@@ -3,6 +3,11 @@ from .models import *
 from .models import (Customer, Product, Cart, OrderPlaced)
 
 
+@admin.register(BannerSlider)
+class BannerSliderModelAdmin(admin.ModelAdmin):
+    list_display = ['banner_slider_item']
+
+
 @admin.register(Customer)
 class CustomerModelAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'name', 'locality', 'city', 'zipcode', 'state']

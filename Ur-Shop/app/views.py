@@ -17,11 +17,12 @@ from .models import *
 class ProductView(View):
 
     def get(self, request):
+        banner_slider = BannerSlider.objects.all()
         top_wears = Product.objects.filter(category='TW')
         bottom_wears = Product.objects.filter(category='BW')
         mobiles = Product.objects.filter(category='M')
         return render(request, 'app/home.html',
-                      {'topwears': top_wears, 'bottomwears': bottom_wears, 'mobiles': mobiles})
+                      {'banner_slider': banner_slider, 'topwears': top_wears, 'bottomwears': bottom_wears, 'mobiles': mobiles})
 
 
 # def product_detail(request):

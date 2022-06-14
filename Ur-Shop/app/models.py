@@ -9,6 +9,10 @@ DIVISION_CHOICES = (
 )
 
 
+class BannerSlider(models.Model):
+    banner_slider_item = models.ImageField(upload_to='BannerImg')
+
+
 class Customer (models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
